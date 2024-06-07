@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 // import { customerSupportAgent } from "~/agents";
 import * as agents from "@/agents";
 
@@ -12,12 +12,11 @@ export default defineEventHandler(async (event) => {
 
   const { OPENAI_API_KEY } = useRuntimeConfig();
 
-  const configuration = new Configuration({
+  const openai = new OpenAI({
     apiKey: OPENAI_API_KEY,
   });
-  const openai = new OpenAIApi(configuration);
 
-  const completion = await openai.createChatCompletion({
+  const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: body.messages || [],
     temperature: body.temperature || 1,
@@ -27,5 +26,6 @@ export default defineEventHandler(async (event) => {
   });
 
   // console.log(completion.data.choices[0]);
-  return completion.data;
+  // return completion.data;
+  return completion;
 });
