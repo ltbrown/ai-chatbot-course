@@ -2,4 +2,5 @@
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt"],
   ssr: false,
+  runtimeConfig: { OPENAI_API_KEY: process.env.OPENAI_API_KEY },
 });
